@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff5c8a">
+  <title>For My Love ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="hearts" class="floating-hearts" aria-hidden="true"></div>
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <main class="app">
+    <!-- 1. Welcome -->
+    <section class="screen active" id="welcome">
+      <div class="card hero-card">
+        <div class="mini-badge">Vaa Arunachalam (magalae), nee varuva nu enaku theryum ❤️</div>
+        <div class="big-heart">♥</div>
+        <p class="eyebrow">To my Content Queen of my queen ruling kingdom</p>
+        <h1>Hey, Nimalan amma<br>Happy Birthday! 🎂</h1>
+        <p class="lead">
+          Unakagha Naa ena panirken paakraya?<br>
+          Before that enaku edhachu order pandraya?...
+        </p>
+        <p class="script">unga moonji la smile romba alpa uh iruku....suttle uh sirichtae next ponga</p>
+        <button class="primary-btn" data-next="birthday">💝 Surprise paaka- Indha button-ai click seiyavum</button>
+      </div>
+    </section>
+
+    <!-- 2. Birthday -->
+    <section class="screen" id="birthday">
+      <div class="card">
+        <div class="emoji-row">🎈 🎂 🎉</div>
+        <p class="eyebrow">Nimalan amma unakku porandha naal🎂 🎉</p>
+        <h1>Happy Birthday,<br><span class="accent"> Selva Keerthana❤️</span></h1>
+        <p class="lead">
+          The world became a little more beautiful<br>
+          on the day you were born.
+        </p>
+        <div class="type-box" id="birthdayType">
+          And somehow, I got lucky enough to have you in my life.
+        </div>
+        <button class="primary-btn" data-next="quizIntro">podhum-next'u ❤️</button>
+      </div>
+    </section>
+
+    <!-- 3. Quiz intro -->
+    <section class="screen" id="quizIntro">
+      <div class="card">
+        <div class="emoji-big">🧩</div>
+        <p class="eyebrow">Round 1</p>
+        <h2>Okay... Vaanga veladuvom</h2>
+        <p class="lead">Computer Nimalan- prepare the questions 😎</p>
+        <div class="challenge">
+          <span>⚠️</span>
+          <strong>Warning:</strong> game-u game uh irukanum...endha question uh paathum kovapadapudadhuu .
+        </div>
+        <button class="primary-btn" data-next="loveQuiz">indha maa yeii----indha button uh click pannu 😏</button>
+      </div>
+    </section>
+
+    <!-- 4. Love quiz -->
+    <section class="screen" id="loveQuiz">
+      <div class="card quiz-card">
+        <div class="question-number">LOVE DETECTOR 3000</div>
+        <h2>Do you love me?<br>(illl Thakka seiya?)❤️</h2>
+        <p class="subtle">Nimalan hid your YES behind 8 suspicious excuses. Catch the honest one 🕵️‍♀️</p>
+
+        <div class="yes-answer-area">
+          <div class="yes-puzzle-label">
+            <span>EXCUSE-O-METER</span>
+            <span id="yesPuzzleProgress">0 / 9 opened</span>
+          </div>
+          <div class="yes-puzzle-grid" id="yesPuzzleGrid" aria-label="Find the hidden yes tile"></div>
+          <button class="yes-btn hidden" id="yesButton">YES ❤️</button>
+        </div>
+        <div class="no-button-area" id="noButtonArea">
+          <button class="no-btn" id="noButton">Nee dha dairiyamana aal aachae, NO CLICK PANI PAARU</button>
+        </div>
+        <p class="hint" id="noHint"></p>
+      </div>
+    </section>
+
+    <!-- 5. Personal reasons -->
+    <section class="screen" id="reasons">
+      <div class="card">
+        <p class="eyebrow">A few reasons...</p>
+        <h2>Why I Love You ❤️</h2>
+        <p class="subtle">Ennavendru solvadhamma!!!</p>
+
+        <div class="reason-card" id="reasonCard">
+          <div class="reason-number">01</div>
+          <div class="reason-icon">😊</div>
+          <h3 id="reasonTitle">Nee seira biriyani</h3>
+          <p id="reasonText">enaku theryum , oh idha ena ne love pandradhuku reason uh? vera reason ilaya nu keka thonum- next page po di venna</p>
+        </div>
+
+        <div class="progress-dots" id="reasonDots"></div>
+        <button class="primary-btn" id="reasonNext">There's more... ❤️</button>
+      </div>
+    </section>
+
+    <!-- 6. Couple quiz -->
+    <section class="screen" id="coupleQuiz">
+      <div class="card">
+        <p class="eyebrow">Round 2</p>
+        <h2>How well do you know <span class="accent">us?</span> 🥰</h2>
+        <p class="subtle">Personalize these questions in <code>script.js</code>.</p>
+
+        <div class="memory-question">
+          <div class="question-number" id="coupleQNo">QUESTION 1 / 4</div>
+          <h3 id="coupleQuestion">Who is more likely to say “I'm not hungry” and then eat your food? 😂</h3>
+          <div class="options" id="coupleOptions"></div>
+          <p class="quiz-feedback" id="coupleFeedback"></p>
+        </div>
+        <button class="primary-btn hidden" id="coupleNext">Next question →</button>
+      </div>
+    </section>
+
+    <!-- 7. Our story -->
+    <section class="screen" id="story">
+      <div class="card wide-card">
+        <p class="eyebrow">Our little story</p>
+        <h2>Some moments I never want to forget 📸</h2>
+        <p class="subtle">Keelae paar.</p>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-dot">❤️</div>
+            <div class="memory-photo"><img src="assets/Photo1.png" alt="The beginning of our story"></div>
+            <h3>Chammu Favourite of us</h3>
+            <p>The elegant bride</p>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-dot">🥰</div>
+            <div class="memory-photo"><img src="assets/Photo2.png" alt="A favorite memory together"></div>
+            <h3>Naa Nee Nimalan</h3>
+            <p>This is our all time family picture</p>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-dot">✈️</div>
+            <div class="memory-photo"><img src="assets/Photo3.png" alt="An adventure together"></div>
+            <h3>An Adventure</h3>
+            <p>You did this for me</p>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-dot">💍</div>
+            <div class="memory-photo"><img src="assets/Photo4.png" alt="The two of us"></div>
+            <h3>Our Promise</h3>
+            <p>Oru Deivam thandha poo alais naam thooki valarkum thuyaram</p>
+          </article>
+        </div>
+
+        <button class="primary-btn" data-next="letter">One last thing... 💌</button>
+      </div>
+    </section>
+
+    <!-- 8. Letter -->
+    <section class="screen" id="letter">
+      <div class="card letter-card">
+        <div class="envelope">💌</div>
+        <p class="eyebrow">From my heart</p>
+        <h2>To My Beautiful Wife</h2>
+        <div class="letter" id="letterText"></div>
+        <button class="primary-btn" id="finalSurpriseBtn">🎁 Open your final surprise</button>
+      </div>
+    </section>
+
+    <!-- 9. Final -->
+    <section class="screen" id="final">
+      <div class="card final-card">
+        <div class="final-hearts">❤️ 💕 ❤️</div>
+        <div class="countdown" id="countdown">3</div>
+        <div id="finalContent" class="hidden">
+          <div class="emoji-big">🎉</div>
+          <h1>HAPPY BIRTHDAY!</h1>
+          <h2 class="script accent">My Love ❤️</h2>
+          <p class="lead">
+            I love you more than this little website<br>
+            could ever explain.
+          </p>
+          <div class="signature">
+            Forever yours,<br>
+            <strong>Your Husband ❤️</strong>
+          </div>
+          <button class="secondary-btn" id="replayBtn">↻ Play it again</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Background music loops for the lifetime of the page. -->
+  <audio id="bgMusic" autoplay loop preload="auto">
+    <source src="assets/Payye_Veeshum.mp3" type="audio/mpeg">
+  </audio>
+  <button id="musicButton" class="music-button" type="button" aria-label="Play background music">♫ Play music</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

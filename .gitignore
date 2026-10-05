@@ -1,0 +1,9 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Dependencies and generated output
+node_modules/
+dist/
+build/
