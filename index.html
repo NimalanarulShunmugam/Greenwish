@@ -15,19 +15,128 @@
   <canvas id="confettiCanvas" aria-hidden="true"></canvas>
 
   <main class="app">
+    <section class="screen active" id="builder">
+      <div class="builder-shell">
+        <div class="builder-panel card">
+          <p class="eyebrow">Birthday MVP</p>
+          <h1>Design your page</h1>
+          <p class="lead">Add the message details on the left and watch the live birthday page on the right.</p>
+
+          <form id="draftForm" class="draft-form">
+            <div class="field-grid two-col">
+              <label class="field">
+                <span>Sender name</span>
+                <input id="senderName" name="senderName" type="text" placeholder="e.g., Alex" value="Your Name" required />
+              </label>
+
+              <label class="field">
+                <span>Recipient name</span>
+                <input id="recipientName" name="recipientName" type="text" placeholder="e.g., Sarah" value="My Love" required />
+              </label>
+            </div>
+
+            <label class="field">
+              <span>First page heading</span>
+              <input id="heroTitle" name="heroTitle" type="text" placeholder="e.g., Happy Birthday, Sarah!" value="Happy Birthday, My Love!" />
+            </label>
+
+            <label class="field">
+              <span>First page message</span>
+              <textarea id="firstPageMessage" name="firstPageMessage" rows="3" placeholder="e.g., I made this little surprise to celebrate you and all the joy you bring.">The world feels brighter with you in it. Today is all about celebrating the love, the laughter, and the beautiful life we are building together.</textarea>
+            </label>
+
+            <label class="field">
+              <span>Next button text</span>
+              <input id="nextButtonText" name="nextButtonText" type="text" placeholder="e.g., Open your surprise" value="Open surprise" />
+            </label>
+
+            <label class="field">
+              <span>Personal message</span>
+              <textarea id="personalMessage" name="personalMessage" rows="4" placeholder="e.g., Happy Birthday! Your laugh makes every day brighter.">Happy Birthday! You make every day brighter and every moment feel more meaningful. I am so lucky to celebrate you today.</textarea>
+            </label>
+
+            <label class="field">
+              <span>Love note</span>
+              <textarea id="loveLetter" name="loveLetter" rows="5" placeholder="e.g., You are my favorite person, and I feel lucky to share life with you.">You are my favorite person, my safe place, and the reason I smile without trying. Thank you for being the love of my life.</textarea>
+            </label>
+
+            <div class="field-group-block">
+              <div class="field-header-row">
+                <span>Quiz questions</span>
+                <button type="button" class="mini-btn" id="addQuestionBtn">+ Add question</button>
+              </div>
+              <div id="quizQuestionsContainer" class="quiz-questions-container"></div>
+            </div>
+
+            <label class="field">
+              <span>Hidden yes puzzle</span>
+              <input id="yesPuzzle" name="yesPuzzle" type="text" placeholder="e.g., I knew you'd say yes!" value="The secret answer is YES" />
+            </label>
+
+            <div class="field">
+              <span>Decoy phrases (8 favorite or often-used phrases you share)</span>
+              <div id="decoyPhraseInputs" class="field-grid"></div>
+              <small>Leave any blank and we'll fill it with a romantic phrase.</small>
+            </div>
+
+            <div class="builder-actions">
+              <button type="button" class="primary-btn" id="previewDraftBtn">Preview page</button>
+              <button type="button" class="secondary-btn" id="saveDraftBtn">Save draft</button>
+            </div>
+
+            <p id="draftStatus" class="draft-status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="preview-panel">
+          <div class="sample-card">
+            <div class="balloon-group" aria-hidden="true">
+              <span class="balloon b-one">🎈</span>
+              <span class="balloon b-two">💖</span>
+              <span class="balloon b-three">🎂</span>
+            </div>
+
+            <div class="sample-badge">Birthday Wish</div>
+            <div class="sample-heart">♥</div>
+            <p class="sample-kicker">For the one I adore</p>
+            <h2 id="previewHeroTitle">Happy Birthday, My Love!</h2>
+            <p id="previewFirstPageMessage" class="sample-copy">The world feels brighter with you in it.</p>
+
+            <button type="button" class="sample-primary" id="previewPrimaryAction">Open surprise</button>
+
+            <div class="preview-mini-card">
+              <p class="mini-label">A little message</p>
+              <p id="previewPersonalMessage" class="mini-message">Happy Birthday! You make every day brighter.</p>
+            </div>
+
+            <div class="preview-quiz-box">
+              <div class="question-number">QUIZ</div>
+              <div id="previewQuizList" class="preview-quiz-list"></div>
+            </div>
+
+            <div class="preview-meta">
+              <p><strong>Hidden YES:</strong> <span id="previewYesPuzzle">The secret answer is YES</span></p>
+              <p><strong>Decoy phrases:</strong> <span id="previewDecoyPhrases">coffee, rain, late-night chats</span></p>
+            </div>
+
+            <button type="button" class="sample-no" id="previewNoButton">No, maybe not</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 1. Welcome -->
-    <section class="screen active" id="welcome">
+    <section class="screen" id="welcome">
       <div class="card hero-card">
-        <div class="mini-badge">Vaa Arunachalam (magalae), nee varuva nu enaku theryum ❤️</div>
+        <div class="mini-badge">A little birthday surprise ❤️</div>
         <div class="big-heart">♥</div>
-        <p class="eyebrow">To my Content Queen of my queen ruling kingdom</p>
-        <h1>Hey, Nimalan amma<br>Happy Birthday! 🎂</h1>
-        <p class="lead">
-          Unakagha Naa ena panirken paakraya?<br>
-          Before that enaku edhachu order pandraya?...
+        <p class="eyebrow">Made with love, just for you</p>
+        <h1 id="welcomeTitle">Happy Birthday, My Love! 🎂</h1>
+        <p class="lead" id="welcomeMessage">
+          I made something special to celebrate you. Ready to open it?
         </p>
-        <p class="script">unga moonji la smile romba alpa uh iruku....suttle uh sirichtae next ponga</p>
-        <button class="primary-btn" data-next="birthday">💝 Surprise paaka- Indha button-ai click seiyavum</button>
+        <p class="script">A little love, a few happy memories, and a surprise just for you.</p>
+        <button class="primary-btn" id="welcomeNextButton" data-next="birthday">Open surprise</button>
       </div>
     </section>
 
@@ -35,16 +144,16 @@
     <section class="screen" id="birthday">
       <div class="card">
         <div class="emoji-row">🎈 🎂 🎉</div>
-        <p class="eyebrow">Nimalan amma unakku porandha naal🎂 🎉</p>
-        <h1>Happy Birthday,<br><span class="accent"> Selva Keerthana❤️</span></h1>
+        <p class="eyebrow">Today is all about you 🎂 🎉</p>
+        <h1>Happy Birthday,<br><span class="accent" id="birthdayRecipient"> My Love ❤️</span></h1>
         <p class="lead">
-          The world became a little more beautiful<br>
+          The world became a little brighter<br>
           on the day you were born.
         </p>
         <div class="type-box" id="birthdayType">
-          And somehow, I got lucky enough to have you in my life.
+          I feel so lucky to have you in my life.
         </div>
-        <button class="primary-btn" data-next="quizIntro">podhum-next'u ❤️</button>
+        <button class="primary-btn" data-next="quizIntro">Continue ❤️</button>
       </div>
     </section>
 
@@ -53,13 +162,13 @@
       <div class="card">
         <div class="emoji-big">🧩</div>
         <p class="eyebrow">Round 1</p>
-        <h2>Okay... Vaanga veladuvom</h2>
-        <p class="lead">Computer Nimalan- prepare the questions 😎</p>
+        <h2>A little game for you</h2>
+        <p class="lead">Let's see how well we know each other 😎</p>
         <div class="challenge">
           <span>⚠️</span>
-          <strong>Warning:</strong> game-u game uh irukanum...endha question uh paathum kovapadapudadhuu .
+          <strong>Just for fun:</strong> No pressure, just a few playful questions.
         </div>
-        <button class="primary-btn" data-next="loveQuiz">indha maa yeii----indha button uh click pannu 😏</button>
+        <button class="primary-btn" data-next="loveQuiz">Let's play 😏</button>
       </div>
     </section>
 
@@ -67,8 +176,8 @@
     <section class="screen" id="loveQuiz">
       <div class="card quiz-card">
         <div class="question-number">LOVE DETECTOR 3000</div>
-        <h2>Do you love me?<br>(illl Thakka seiya?)❤️</h2>
-        <p class="subtle">Nimalan hid your YES behind 8 suspicious excuses. Catch the honest one 🕵️‍♀️</p>
+        <h2>Do you love me? ❤️</h2>
+        <p class="subtle">Your YES is hiding behind 8 playful excuses. Can you find it? 🕵️‍♀️</p>
 
         <div class="yes-answer-area">
           <div class="yes-puzzle-label">
@@ -79,7 +188,7 @@
           <button class="yes-btn hidden" id="yesButton">YES ❤️</button>
         </div>
         <div class="no-button-area" id="noButtonArea">
-          <button class="no-btn" id="noButton">Nee dha dairiyamana aal aachae, NO CLICK PANI PAARU</button>
+          <button class="no-btn" id="noButton">Try saying no... if you dare 😏</button>
         </div>
         <p class="hint" id="noHint"></p>
       </div>
@@ -90,13 +199,13 @@
       <div class="card">
         <p class="eyebrow">A few reasons...</p>
         <h2>Why I Love You ❤️</h2>
-        <p class="subtle">Ennavendru solvadhamma!!!</p>
+        <p class="subtle">It's the little things that make me love you.</p>
 
         <div class="reason-card" id="reasonCard">
           <div class="reason-number">01</div>
           <div class="reason-icon">😊</div>
-          <h3 id="reasonTitle">Nee seira biriyani</h3>
-          <p id="reasonText">enaku theryum , oh idha ena ne love pandradhuku reason uh? vera reason ilaya nu keka thonum- next page po di venna</p>
+          <h3 id="reasonTitle">Your kindness</h3>
+          <p id="reasonText">The way you care makes every day feel a little brighter.</p>
         </div>
 
         <div class="progress-dots" id="reasonDots"></div>
@@ -109,11 +218,11 @@
       <div class="card">
         <p class="eyebrow">Round 2</p>
         <h2>How well do you know <span class="accent">us?</span> 🥰</h2>
-        <p class="subtle">Personalize these questions in <code>script.js</code>.</p>
+        <p class="subtle">A few playful questions about us.</p>
 
         <div class="memory-question">
           <div class="question-number" id="coupleQNo">QUESTION 1 / 4</div>
-          <h3 id="coupleQuestion">Who is more likely to say “I'm not hungry” and then eat your food? 😂</h3>
+          <h3 id="coupleQuestion">Who is more likely to plan a surprise? 🎁</h3>
           <div class="options" id="coupleOptions"></div>
           <p class="quiz-feedback" id="coupleFeedback"></p>
         </div>
@@ -126,32 +235,32 @@
       <div class="card wide-card">
         <p class="eyebrow">Our little story</p>
         <h2>Some moments I never want to forget 📸</h2>
-        <p class="subtle">Keelae paar.</p>
+        <p class="subtle">A few moments worth keeping.</p>
 
         <div class="timeline">
           <article class="timeline-item">
             <div class="timeline-dot">❤️</div>
             <div class="memory-photo"><img src="assets/Photo1.png" alt="The beginning of our story"></div>
-            <h3>Chammu Favourite of us</h3>
-            <p>The elegant bride</p>
+            <h3>A favorite memory</h3>
+            <p>A moment we'll always treasure</p>
           </article>
           <article class="timeline-item">
             <div class="timeline-dot">🥰</div>
             <div class="memory-photo"><img src="assets/Photo2.png" alt="A favorite memory together"></div>
-            <h3>Naa Nee Nimalan</h3>
-            <p>This is our all time family picture</p>
+            <h3>Together is our favorite place</h3>
+            <p>One of those days we wish could last a little longer</p>
           </article>
           <article class="timeline-item">
             <div class="timeline-dot">✈️</div>
             <div class="memory-photo"><img src="assets/Photo3.png" alt="An adventure together"></div>
             <h3>An Adventure</h3>
-            <p>You did this for me</p>
+            <p>Here's to many more adventures together</p>
           </article>
           <article class="timeline-item">
             <div class="timeline-dot">💍</div>
             <div class="memory-photo"><img src="assets/Photo4.png" alt="The two of us"></div>
             <h3>Our Promise</h3>
-            <p>Oru Deivam thandha poo alais naam thooki valarkum thuyaram</p>
+            <p>Every chapter is better with you by my side</p>
           </article>
         </div>
 
@@ -164,7 +273,7 @@
       <div class="card letter-card">
         <div class="envelope">💌</div>
         <p class="eyebrow">From my heart</p>
-        <h2>To My Beautiful Wife</h2>
+        <h2>To My Love</h2>
         <div class="letter" id="letterText"></div>
         <button class="primary-btn" id="finalSurpriseBtn">🎁 Open your final surprise</button>
       </div>
@@ -185,9 +294,14 @@
           </p>
           <div class="signature">
             Forever yours,<br>
-            <strong>Your Husband ❤️</strong>
+            <strong id="finalSender">Your Name ❤️</strong>
           </div>
           <button class="secondary-btn" id="replayBtn">↻ Play it again</button>
+          <div class="builder-actions">
+            <button type="button" class="secondary-btn" id="finalEditBtn">Back to edit</button>
+            <button type="button" class="primary-btn" id="finalSaveDraftBtn">Save draft</button>
+          </div>
+          <p id="finalDraftStatus" class="draft-status" aria-live="polite"></p>
         </div>
       </div>
     </section>

@@ -12,125 +12,76 @@
 */
 
 const CONFIG = {
-  HER_NAME: "Keerthi",
-  YOUR_NAME: "Chammu",
+  HER_NAME: "My Love",
+  YOUR_NAME: "Your Name",
 
-  LOVE_LETTER: `Happy Birthday, my content queen. ❤️
+  LOVE_LETTER: `Happy Birthday, my love. ❤️
 
-After all the ups and downs we've been through in these three years, I hope we've reached a point the best for us is enaku ne unaku naa dha...vera better life ila
+Today is a reminder of how grateful I am to have you in my life.
 
-"Naa illama nee illa, nee illama naa illa."
+Your kindness, your laughter, and the way you make ordinary moments feel special mean more to me than I can say.
 
-Enala nee illama iruka mudiyadhu. Unna enna thavira yaaralayum ipdi paathuka mudiyadhu.
+I hope this year brings you joy, new adventures, and everything your heart is hoping for.
 
-Namaku kedacha periya gift Nimalan. ❤️
+No matter where life takes us, I'm thankful for every moment we share.
 
-You gave me a reason to live, a reason to dream, and a reason to look forward to tomorrow. My life is not just mine anymore. It's for the three of us — you, me and Nimalan.
+Happy Birthday. I love you, always.
 
-Nimalan naaliku valandhu avanoda own life-a paathutu ponaalum, enaku nee irupa. Appavum naan unakkaga iruppen.
-
-Loosu maari ennalaam pesuren 😂. Aana unmai enna na, nee dhaan enakku indha life-oda purpose-a kudutha.
-
-Enaku niraya suicidal thoughts varum, death ninachu bayam ila...vandha ok nu dha irundhirken..aana ini I want to live for you and nimalan. No more end of life thoughts
-
-Key-thee & Nimalan. ❤️
-
-Nee enna romba nalla paathukra. En life-la yaarum enna ipdi paathadhu illa. Enakku nu edhavadhu venumna nee paathu paathu seira. Enakku edhavadhu aana nee worry panra.
-
-Nimalan-ai indha ulagathukku kondu vandhadhukkum, enakku indha beautiful family-a kuduthadhukkum, romba nandri. ❤️
-
-Nee kovathula pesura sila vaarthaigal enna hurt pannum. Aana nee kovathula pesura nu enakku theriyum. Un mela irukkura love nala naan adha poruthupen, marandhupen.
-
-Aana oru request — kovathula vaarthaigal konjam careful-aa pesu, enakkaga. ❤️
-
-Un life-la nee romba heights-ku poganum.
-
-Nalla work pannu.
-Niraya heights po.
-Global leader aagu.
-
-Oru naal Behindwoods-la interview kudukkumbodhu,
-"En husband eppovume naan global leader aaganum nu sollite irupparu"
-nu sollanum. 😂❤️
-
-Life-la nee niraya prove pannanum — career-la, life-la, everything.
-
-Nimalan-ai naan paathukaren. Nee un dreams-a chase pannu.
-
-Nee indha ulagathula best mom.
-Nee enakku best wife.
-Nee Nimalan-ku best mummy.
-
-And most importantly...
-
-Nee dhaan enakku best friend.
-Nee dhaan en home.
-Nee dhaan en life.
-
-Na unna romba love pandren.
-Na unakkaga iruppen.
-Eppovume.
-
-Happy Birthday, Keerthi. ❤️
-
-All the best for everything you're going to achieve.
-
-Love youuuuu,
-Chammu ❤️`,
+With all my love,\nYour Name ❤️`,
 
   REASONS: [
     {
       icon: "😊",
-      title: "Nee seira biriyani",
-      text: "enaku theryum , oh idha ena ne love pandradhuku reason uh? vera reason ilaya nu keka thonum- next page po di venna"
+      title: "Your kindness",
+      text: "The way you care makes every day feel a little brighter."
     },
     {
       icon: "🤍",
-      title: "The way you care",
-      text: "Ne enaku thedi thedi pandra vishayam"
+      title: "Your laugh",
+      text: "I love how easily you can turn an ordinary moment into a happy one."
     },
     {
       icon: "😂",
-      title: "Your Contents",
-      text: "The hell lots of reasons to make me shaking laughs"
+      title: "Our conversations",
+      text: "Even the simplest chats are special when I share them with you."
     },
     {
       icon: "🏡",
       title: "You feel like home",
-      text: "You gave me my own family, ne naa Nimalan"
+      text: "Being with you makes anywhere feel like the right place to be."
     },
     {
       icon: "🥰",
       title: "The little things",
-      text: "example- yu share  your food for me"
+      text: "The thoughtful things you do stay with me long after the moment passes."
     },
     {
       icon: "❤️",
       title: "Simply... you",
-      text: "Neeyae vaazhkai enbaen, ini vaalum naatkal ellam"
+      text: "I love you for exactly who you are."
     }
   ],
 
   COUPLE_QUIZ: [
     {
-      question: "Who among us loves the other person the most? 😂",
-      options: ["Chammu 😎", "Keerthi 😇", "Both of us 😂", "Nobody!"],
-      correct: 1
+      question: "Who is more likely to plan a surprise? 🎁",
+      options: ["You", "Me", "Both of us", "Neither of us"],
+      correct: 2
     },
     {
-      question: "Who puts more bomb secretly? 😏",
-      options: ["Chammu", "Keerthi", "Nimalan", "Let's not expose anyone 😂"],
-      correct: 1
+      question: "What makes our time together special? ❤️",
+      options: ["The laughter", "The little moments", "All of it", "The snacks"],
+      correct: 2
     },
     {
-      question: "Who is the better cook? 🍳",
-      options: ["Chammu", "Keerthi", "Both", "It's classified information"],
-      correct: 1
+      question: "What's the best kind of date? ✨",
+      options: ["A cozy night in", "A little adventure", "Good food together", "Any time with you"],
+      correct: 3
     },
     {
-      question: "Who takes care of nimalan well?",
-      options:["Chammu", "Keerthi", "Definitely both", "Let's not expose anyone 😂"],
-      correct: 1
+      question: "What do I love most about you? 😊",
+      options: ["Your kindness", "Your laugh", "Your heart", "All of you"],
+      correct: 3
     }
   ]
 };
@@ -182,8 +133,386 @@ document.querySelectorAll("[data-next]").forEach(btn => {
   btn.addEventListener("click", () => showScreen(btn.dataset.next));
 });
 
+const draftStorageKey = "greenwish-draft-v2";
+const byId = (id) => document.getElementById(id);
+let activeDraft = null;
+const defaultDecoyPhrases = [
+  "I saved you the last bite",
+  "Just five more minutes together",
+  "You make everything feel like home",
+  "I'll always choose you",
+  "Let's make another happy memory",
+  "You are my favorite person",
+  "I love doing life with you",
+  "Wishing you all the happiness you deserve"
+];
+
+function getDecoyPhraseList(phrases) {
+  const savedPhrases = Array.isArray(phrases)
+    ? phrases
+    : typeof phrases === "string"
+      ? phrases.split(/[,;\n]/)
+      : [];
+
+  return defaultDecoyPhrases.map((fallback, index) => {
+    const phrase = savedPhrases[index];
+    return typeof phrase === "string" && phrase.trim() ? phrase.trim() : fallback;
+  });
+}
+
+function createQuizQuestion(question = "Who knows you best?", options = ["You", "Me", "Both of us"], answerIndex = 0) {
+  return {
+    question,
+    options,
+    answerIndex
+  };
+}
+
+function getDraftDefaults() {
+  return {
+    senderName: "Your Name",
+    recipientName: "My Love",
+    heroTitle: "Happy Birthday, My Love!",
+    firstPageMessage: "The world feels brighter with you in it. Today is all about celebrating the love, the laughter, and the beautiful life we are building together.",
+    nextButtonText: "Open surprise",
+    personalMessage: "Happy Birthday! You make every day brighter and every moment feel more meaningful. I am so lucky to celebrate you today.",
+    loveLetter: "You are my favorite person, my safe place, and the reason I smile without trying. Thank you for being the love of my life.",
+    quizQuestions: [
+      createQuizQuestion("Who knows you best?", ["You", "Me", "Both of us"], 2),
+      createQuizQuestion("Who makes you smile the most?", ["Me", "You", "Our memories"], 0),
+      createQuizQuestion("What makes us special?", ["Love", "Laughter", "Everything"], 2)
+    ],
+    yesPuzzle: "The secret answer is YES",
+    decoyPhrases: [...defaultDecoyPhrases]
+  };
+}
+
+function readDraft() {
+  try {
+    const saved = localStorage.getItem(draftStorageKey);
+    return saved ? JSON.parse(saved) : null;
+  } catch (error) {
+    console.warn("Unable to read draft", error);
+    return null;
+  }
+}
+
+function writeDraft(draft) {
+  try {
+    localStorage.setItem(draftStorageKey, JSON.stringify(draft));
+  } catch (error) {
+    console.warn("Unable to save draft", error);
+  }
+}
+
+function setDraftStatus(message) {
+  ["draftStatus", "finalDraftStatus"].forEach(id => {
+    const statusEl = document.getElementById(id);
+    if (statusEl) statusEl.textContent = message;
+  });
+}
+
+function getDraftFromForm() {
+  const blocks = document.querySelectorAll(".quiz-question-block");
+  const quizQuestions = Array.from(blocks).map((block, index) => {
+    const questionInput = block.querySelector(".quiz-question-input");
+    const question = questionInput && questionInput.value ? questionInput.value.trim() : `Question ${index + 1}`;
+    const optionInputs = block.querySelectorAll(".quiz-option-input");
+    const options = Array.from(optionInputs).map(input => input.value.trim()).filter(Boolean);
+    const answerSelect = block.querySelector(".correct-answer-select");
+    const answerIndex = Number((answerSelect && answerSelect.value) || 0);
+
+    return {
+      question,
+      options: options.length ? options : ["Option 1", "Option 2", "Option 3"],
+      answerIndex: Number.isInteger(answerIndex) ? answerIndex : 0
+    };
+  });
+
+  return {
+    senderName: (byId("senderName") && byId("senderName").value.trim()) || getDraftDefaults().senderName,
+    recipientName: (byId("recipientName") && byId("recipientName").value.trim()) || getDraftDefaults().recipientName,
+    heroTitle: (byId("heroTitle") && byId("heroTitle").value.trim()) || getDraftDefaults().heroTitle,
+    firstPageMessage: (byId("firstPageMessage") && byId("firstPageMessage").value.trim()) || getDraftDefaults().firstPageMessage,
+    nextButtonText: (byId("nextButtonText") && byId("nextButtonText").value.trim()) || getDraftDefaults().nextButtonText,
+    personalMessage: (byId("personalMessage") && byId("personalMessage").value.trim()) || getDraftDefaults().personalMessage,
+    loveLetter: (byId("loveLetter") && byId("loveLetter").value.trim()) || getDraftDefaults().loveLetter,
+    quizQuestions: quizQuestions.length ? quizQuestions : getDraftDefaults().quizQuestions,
+    yesPuzzle: (byId("yesPuzzle") && byId("yesPuzzle").value.trim()) || getDraftDefaults().yesPuzzle,
+    decoyPhrases: getDecoyPhraseList(
+      Array.from(document.querySelectorAll(".decoy-phrase-input"), input => input.value)
+    )
+  };
+}
+
+function renderDecoyPhraseInputs(phrases) {
+  const container = byId("decoyPhraseInputs");
+  if (!container) return;
+
+  container.innerHTML = "";
+  getDecoyPhraseList(phrases).forEach((phrase, index) => {
+    const label = document.createElement("label");
+    label.className = "field compact-field";
+    label.innerHTML = `
+      <span>Decoy phrase ${index + 1}</span>
+      <input class="decoy-phrase-input" type="text" placeholder="${defaultDecoyPhrases[index]}" value="${phrase.replace(/&/g, "&amp;").replace(/\"/g, "&quot;").replace(/</g, "&lt;")}" />
+    `;
+    container.appendChild(label);
+  });
+}
+
+function renderQuizInputBlocks(questions) {
+  const container = document.getElementById("quizQuestionsContainer");
+  if (!container) return;
+
+  container.innerHTML = "";
+  const items = questions.length ? questions : getDraftDefaults().quizQuestions;
+
+  items.forEach((item, index) => {
+    const block = document.createElement("div");
+    block.className = "quiz-question-block";
+    block.innerHTML = `
+      <div class="quiz-block-header">
+        <span>Question ${index + 1}</span>
+        <button type="button" class="mini-btn danger" data-remove-question="${index}">Remove</button>
+      </div>
+      <label class="field compact-field">
+        <span>Question text</span>
+        <input class="quiz-question-input" type="text" placeholder="e.g., Who is more likely to plan a surprise?" value="${(item.question || "Who is more likely to plan a surprise?").replace(/"/g, '&quot;')}" />
+      </label>
+      <div class="option-row small-row">
+        <label class="field compact-field">
+          <span>Option 1</span>
+          <input class="quiz-option-input" type="text" placeholder="e.g., You" value="${(item.options?.[0] || "You").replace(/"/g, '&quot;')}" />
+        </label>
+        <label class="field compact-field">
+          <span>Option 2</span>
+          <input class="quiz-option-input" type="text" placeholder="e.g., Me" value="${(item.options?.[1] || "Me").replace(/"/g, '&quot;')}" />
+        </label>
+        <label class="field compact-field">
+          <span>Option 3</span>
+          <input class="quiz-option-input" type="text" placeholder="e.g., Both of us" value="${(item.options?.[2] || "Both of us").replace(/"/g, '&quot;')}" />
+        </label>
+      </div>
+      <label class="field compact-field">
+        <span>Correct answer</span>
+        <select class="correct-answer-select">
+          <option value="0" ${Number(item.answerIndex) === 0 ? "selected" : ""}>Option 1</option>
+          <option value="1" ${Number(item.answerIndex) === 1 ? "selected" : ""}>Option 2</option>
+          <option value="2" ${Number(item.answerIndex) === 2 ? "selected" : ""}>Option 3</option>
+        </select>
+      </label>
+    `;
+    container.appendChild(block);
+  });
+
+  container.querySelectorAll("[data-remove-question]").forEach(removeBtn => {
+    removeBtn.addEventListener("click", (event) => {
+      const { removeQuestion } = event.currentTarget.dataset;
+      const current = Array.from(container.querySelectorAll(".quiz-question-block"));
+      const index = Number(removeQuestion);
+      if (current.length <= 1) return;
+      current[index].remove();
+      renderQuizInputBlocks(Array.from(container.querySelectorAll(".quiz-question-block")).map(block => {
+        const inputs = block.querySelectorAll(".quiz-option-input");
+        return {
+          question: block.querySelector(".quiz-question-input").value,
+          options: Array.from(inputs).map(input => input.value),
+          answerIndex: Number(block.querySelector(".correct-answer-select").value || 0)
+        };
+      }));
+    });
+  });
+}
+
+function populateDraftForm(draft) {
+  const values = { ...getDraftDefaults(), ...draft };
+  if (byId("senderName")) byId("senderName").value = values.senderName;
+  if (byId("recipientName")) byId("recipientName").value = values.recipientName;
+  if (byId("heroTitle")) byId("heroTitle").value = values.heroTitle;
+  if (byId("firstPageMessage")) byId("firstPageMessage").value = values.firstPageMessage;
+  if (byId("nextButtonText")) byId("nextButtonText").value = values.nextButtonText;
+  if (byId("personalMessage")) byId("personalMessage").value = values.personalMessage;
+  if (byId("loveLetter")) byId("loveLetter").value = values.loveLetter;
+  if (byId("yesPuzzle")) byId("yesPuzzle").value = values.yesPuzzle;
+  renderDecoyPhraseInputs(values.decoyPhrases);
+  renderQuizInputBlocks(values.quizQuestions || getDraftDefaults().quizQuestions);
+}
+
+function renderQuizCards(draft) {
+  const previewQuizList = document.getElementById("previewQuizList");
+  const questions = draft.quizQuestions && draft.quizQuestions.length ? draft.quizQuestions : getDraftDefaults().quizQuestions;
+
+  const renderList = (container) => {
+    if (!container) return;
+    container.innerHTML = "";
+    questions.forEach((q, idx) => {
+      const item = document.createElement("div");
+      item.className = "preview-question-item";
+      const heading = document.createElement("h4");
+      heading.textContent = `Q${idx + 1}. ${q.question || `Question ${idx + 1}`}`;
+      const optionsList = document.createElement("ul");
+      (q.options || ["Option 1", "Option 2", "Option 3"]).forEach(option => {
+        const optionItem = document.createElement("li");
+        optionItem.textContent = option;
+        optionsList.appendChild(optionItem);
+      });
+      item.append(heading, optionsList);
+      container.appendChild(item);
+    });
+  };
+
+  renderList(previewQuizList);
+}
+
+function renderPreview(draft) {
+  const previewTitle = document.getElementById("previewHeroTitle");
+  const previewPageMessage = document.getElementById("previewFirstPageMessage");
+  const previewPrimaryAction = document.getElementById("previewPrimaryAction");
+  const previewPersonal = document.getElementById("previewPersonalMessage");
+  const previewYesPuzzle = document.getElementById("previewYesPuzzle");
+  const previewDecoyPhrases = document.getElementById("previewDecoyPhrases");
+
+  if (previewTitle) previewTitle.textContent = draft.heroTitle || `Happy Birthday, ${draft.recipientName}!`;
+  if (previewPageMessage) previewPageMessage.textContent = draft.firstPageMessage || "The world feels brighter with you in it.";
+  if (previewPrimaryAction) previewPrimaryAction.textContent = draft.nextButtonText || "Open surprise";
+  if (previewPersonal) previewPersonal.textContent = `${draft.personalMessage || "Happy Birthday!"}\n\nFrom ${draft.senderName}`;
+  if (previewYesPuzzle) previewYesPuzzle.textContent = draft.yesPuzzle;
+  const decoyPhraseSummary = getDecoyPhraseList(draft.decoyPhrases).join(", ");
+  if (previewDecoyPhrases) previewDecoyPhrases.textContent = decoyPhraseSummary;
+
+  renderQuizCards(draft);
+}
+
+function applyDraftToExperience(draft) {
+  document.title = `Happy Birthday, ${draft.recipientName} ❤️`;
+  if (byId("welcomeTitle")) byId("welcomeTitle").textContent = draft.heroTitle;
+  if (byId("welcomeMessage")) byId("welcomeMessage").textContent = draft.firstPageMessage;
+  if (byId("welcomeNextButton")) byId("welcomeNextButton").textContent = draft.nextButtonText;
+  if (byId("birthdayRecipient")) byId("birthdayRecipient").textContent = draft.recipientName;
+  if (byId("birthdayType")) byId("birthdayType").textContent = draft.personalMessage;
+  if (byId("finalSender")) byId("finalSender").textContent = `${draft.senderName} ❤️`;
+
+  CONFIG.COUPLE_QUIZ = draft.quizQuestions.map(question => ({
+    question: question.question,
+    options: question.options,
+    correct: question.answerIndex
+  }));
+}
+
+function saveCurrentDraft() {
+  const draft = getDraftFromForm();
+  activeDraft = draft;
+  writeDraft(draft);
+  setDraftStatus("Draft saved locally.");
+  renderPreview(draft);
+  return draft;
+}
+
+function previewCurrentDraft() {
+  activeDraft = getDraftFromForm();
+  renderPreview(activeDraft);
+  applyDraftToExperience(activeDraft);
+  resetExperience();
+  showScreen("welcome");
+}
+
+const addQuestionBtn = document.getElementById("addQuestionBtn");
+if (addQuestionBtn) {
+  addQuestionBtn.addEventListener("click", () => {
+    const container = document.getElementById("quizQuestionsContainer");
+    if (!container) return;
+
+    const current = Array.from(container.querySelectorAll(".quiz-question-block"));
+    const nextIndex = current.length;
+    const item = document.createElement("div");
+    item.className = "quiz-question-block";
+    item.innerHTML = `
+      <div class="quiz-block-header">
+        <span>Question ${nextIndex + 1}</span>
+        <button type="button" class="mini-btn danger" data-remove-question="${nextIndex}">Remove</button>
+      </div>
+      <label class="field compact-field">
+        <span>Question text</span>
+        <input class="quiz-question-input" type="text" placeholder="e.g., Who is more likely to plan a surprise?" value="Who is more likely to plan a surprise?" />
+      </label>
+      <div class="option-row small-row">
+        <label class="field compact-field">
+          <span>Option 1</span>
+          <input class="quiz-option-input" type="text" placeholder="e.g., You" value="You" />
+        </label>
+        <label class="field compact-field">
+          <span>Option 2</span>
+          <input class="quiz-option-input" type="text" placeholder="e.g., Me" value="Me" />
+        </label>
+        <label class="field compact-field">
+          <span>Option 3</span>
+          <input class="quiz-option-input" type="text" placeholder="e.g., Both of us" value="Both of us" />
+        </label>
+      </div>
+      <label class="field compact-field">
+        <span>Correct answer</span>
+        <select class="correct-answer-select">
+          <option value="0">Option 1</option>
+          <option value="1">Option 2</option>
+          <option value="2">Option 3</option>
+        </select>
+      </label>
+    `;
+    container.appendChild(item);
+
+    item.querySelector("[data-remove-question]").addEventListener("click", () => {
+      const blocks = Array.from(container.querySelectorAll(".quiz-question-block"));
+      if (blocks.length <= 1) return;
+      item.remove();
+      renderQuizInputBlocks(Array.from(container.querySelectorAll(".quiz-question-block")).map(block => ({
+        question: block.querySelector(".quiz-question-input").value,
+        options: Array.from(block.querySelectorAll(".quiz-option-input")).map(input => input.value),
+        answerIndex: Number(block.querySelector(".correct-answer-select").value || 0)
+      })));
+    });
+  });
+}
+
+const previewDraftBtn = document.getElementById("previewDraftBtn");
+const draftForm = document.getElementById("draftForm");
+if (draftForm) {
+  const updateLivePreview = () => renderPreview(getDraftFromForm());
+  draftForm.addEventListener("input", updateLivePreview);
+  draftForm.addEventListener("change", updateLivePreview);
+}
+
+if (previewDraftBtn) {
+  previewDraftBtn.addEventListener("click", () => {
+    previewCurrentDraft();
+    setDraftStatus("Full experience preview started. Draft not saved yet.");
+  });
+}
+
+const saveDraftBtn = document.getElementById("saveDraftBtn");
+if (saveDraftBtn) {
+  saveDraftBtn.addEventListener("click", saveCurrentDraft);
+}
+
+const finalEditBtn = document.getElementById("finalEditBtn");
+if (finalEditBtn) finalEditBtn.addEventListener("click", () => showScreen("builder"));
+
+const finalSaveDraftBtn = document.getElementById("finalSaveDraftBtn");
+if (finalSaveDraftBtn) finalSaveDraftBtn.addEventListener("click", saveCurrentDraft);
+
+const savedDraft = readDraft();
+activeDraft = { ...getDraftDefaults(), ...(savedDraft || {}) };
+if (savedDraft) {
+  populateDraftForm(savedDraft);
+  renderPreview(activeDraft);
+} else {
+  populateDraftForm(activeDraft);
+  renderPreview(activeDraft);
+}
+applyDraftToExperience(activeDraft);
+
 /* Personalize visible text */
-document.title = `Happy Birthday, ${CONFIG.HER_NAME} ❤️`;
+document.title = `Happy Birthday, ${activeDraft.recipientName} ❤️`;
 
 /* Floating hearts */
 const heartContainer = document.getElementById("hearts");
@@ -232,16 +561,7 @@ function buildYesFinder() {
   yesButton.classList.add("hidden");
   yesPuzzleProgress.textContent = "0 / 9 opened";
   const yesIndex = Math.floor(Math.random() * 9);
-  const decoys = [
-    "sorry, vera click pannunga",
-    "Ask Nimalanarul",
-    "idhu ena pazham? aahn vaazhapazham",
-    "sildra ila maa..palaya soru ok va",
-    "en kita edhu darling unta heavy uh pudichudhu?",
-    "Naa ila yes'u,vera try panu",
-    "hello saar, are you kapil?",
-    "appanae muruga, ayo pillayara"
-  ];
+  const decoys = getDecoyPhraseList(activeDraft.decoyPhrases);
   let openedTiles = 0;
   let yesTile = null;
 
@@ -265,7 +585,7 @@ function buildYesFinder() {
           : "YES found, but locked until the ninth tile");
         tile.classList.add(openedTiles === 9 ? "correct" : "revealed");
         noHint.textContent = openedTiles === 9
-          ? "Caught the only honest answer! The court accepts YES. ⚖️❤️"
+          ? `${activeDraft.yesPuzzle} ⚖️❤️`
           : "You found YES! The court unlocks it after all 9 tiles. 🔒";
       } else {
         const decoy = decoys.splice(Math.floor(Math.random() * decoys.length), 1)[0];
@@ -274,7 +594,7 @@ function buildYesFinder() {
         tile.classList.add("revealed");
         noHint.textContent = [
           "Objection! That excuse makes no sense 😂",
-          "Suspicious. Nimalan has been notified 🕵️",
+          "Suspicious. Someone has been notified 🕵️",
           "The love court rejects this answer ⚖️"
         ][Math.floor(Math.random() * 3)];
       }
@@ -286,11 +606,27 @@ function buildYesFinder() {
         yesTile.classList.add("correct");
         yesButton.classList.remove("hidden");
         yesPuzzleProgress.textContent = "CASE SOLVED: love confirmed";
-        noHint.textContent = "All 9 excuses checked. The court accepts YES! ⚖️❤️";
+        noHint.textContent = `${activeDraft.yesPuzzle} ⚖️❤️`;
       }
     });
     yesPuzzleGrid.appendChild(tile);
   }
+}
+
+function resetExperience() {
+  noClicks = 0;
+  noButton.textContent = "Try saying no... if you dare 😏";
+  noButton.style.left = "";
+  noButton.style.top = "";
+  noHint.textContent = "";
+  buildYesFinder();
+  reasonIndex = 0;
+  coupleIndex = 0;
+  letterStarted = false;
+  letterText.textContent = "";
+  byId("countdown").textContent = "3";
+  byId("countdown").classList.remove("hidden");
+  byId("finalContent").classList.add("hidden");
 }
 
 buildYesFinder();
@@ -424,7 +760,7 @@ function typeLetter() {
   if (letterStarted) return;
   letterStarted = true;
   letterText.textContent = "";
-  const text = CONFIG.LOVE_LETTER;
+  const text = activeDraft.loveLetter || CONFIG.LOVE_LETTER;
   let i = 0;
 
   function tick() {
