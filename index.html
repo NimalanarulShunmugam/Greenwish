@@ -71,6 +71,20 @@
 
             <div class="field-group-block">
               <div class="field-header-row">
+                <span>Background song</span>
+              </div>
+              <audio id="audioPreview" class="audio-preview" controls preload="metadata" src="assets/Payye_Veeshum.mp3"></audio>
+              <div class="audio-input-actions">
+                <input id="audioFileInput" type="file" accept="audio/*" hidden />
+                <button type="button" class="secondary-btn" id="chooseAudioBtn">Choose audio file</button>
+                <button type="button" class="mini-btn" id="useDefaultAudioBtn">Use default song</button>
+                <span id="audioFileName" class="audio-file-name">Payye_Veeshum.mp3</span>
+              </div>
+              <small>Preview it here. The song starts when the birthday surprise opens.</small>
+            </div>
+
+            <div class="field-group-block">
+              <div class="field-header-row">
                 <span>Quiz questions</span>
                 <button type="button" class="mini-btn" id="addQuestionBtn">+ Add question</button>
               </div>
@@ -165,7 +179,7 @@
             <span id="yesPuzzleProgress">0 / 9 opened</span>
           </div>
           <div class="balloon-board" id="yesPuzzleGrid" aria-label="Pop all nine balloons to reveal the answer"></div>
-          <button class="yes-btn hidden" id="yesButton">YES ❤️</button>
+          <button class="yes-btn hidden" id="yesButton">YES</button>
         </div>
         <div class="no-button-area" id="noButtonArea">
           <button class="no-btn" id="noButton">Try saying no... if you dare 😏</button>
@@ -189,7 +203,7 @@
         </div>
 
         <div class="progress-dots" id="reasonDots"></div>
-        <button class="primary-btn" id="reasonNext">There's more... ❤️</button>
+        <button class="primary-btn" id="reasonNext">There's more...</button>
       </div>
     </section>
 
@@ -262,11 +276,7 @@
     </section>
   </main>
 
-  <!-- Background music loops for the lifetime of the page. -->
-  <audio id="bgMusic" autoplay loop preload="auto">
-    <source src="assets/Payye_Veeshum.mp3" type="audio/mpeg">
-  </audio>
-  <button id="musicButton" class="music-button" type="button" aria-label="Play background music">♫ Play music</button>
+  <audio id="bgMusic" loop preload="metadata"></audio>
 
   <script src="script.js"></script>
 </body>

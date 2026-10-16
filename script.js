@@ -36,7 +36,7 @@ With best wishes,\nAlex`,
       text: "Your kindness makes a difference to the people around you."
     },
     {
-      icon: "🤍",
+      icon: "😊",
       title: "Your laugh",
       text: "Your laughter can turn an ordinary moment into a fun one."
     },
@@ -50,13 +50,13 @@ With best wishes,\nAlex`,
       title: "You feel like home",
       text: "You make any place more fun to be."
     },
-    {
-      icon: "🥰",
+      {
+        icon: "🤝",
       title: "The little things",
       text: "The thoughtful things you do make a lasting difference."
     },
     {
-      icon: "❤️",
+        icon: "🌟",
       title: "Simply... you",
       text: "You are great exactly as you are."
     }
@@ -69,7 +69,7 @@ With best wishes,\nAlex`,
       correct: 2
     },
     {
-      question: "What makes our time together special? ❤️",
+      question: "What makes our time together special?",
       options: ["The laughter", "The little moments", "All of it", "The snacks"],
       correct: 2
     },
@@ -88,8 +88,18 @@ With best wishes,\nAlex`,
 
 const screens = [...document.querySelectorAll(".screen")];
 const bgMusic = document.getElementById("bgMusic");
-const musicButton = document.getElementById("musicButton");
-let musicIsPlaying = false;
+const audioPreview = document.getElementById("audioPreview");
+const audioFileInput = document.getElementById("audioFileInput");
+const audioFileName = document.getElementById("audioFileName");
+const defaultBackgroundAudio = {
+  id: "default-background-song",
+  src: "assets/Payye_Veeshum.mp3",
+  name: "Payye_Veeshum.mp3",
+  type: "audio/mpeg"
+};
+let selectedBackgroundAudio = { ...defaultBackgroundAudio };
+let backgroundAudioObjectUrl = null;
+let backgroundAudioSavePromise = null;
 
 function tryPlayMusic() {
   if (!bgMusic) return;
@@ -97,36 +107,14 @@ function tryPlayMusic() {
   bgMusic.play().catch(() => {});
 }
 
-function updateMusicButton() {
-  musicButton.textContent = musicIsPlaying ? "Ⅱ Pause music" : "♫ Play music";
-  musicButton.setAttribute("aria-label", musicIsPlaying ? "Pause background music" : "Play background music");
-}
-
-musicButton.addEventListener("click", () => {
-  if (musicIsPlaying) {
-    bgMusic.pause();
-  } else {
-    tryPlayMusic();
-  }
-});
-bgMusic.addEventListener("playing", () => {
-  musicIsPlaying = true;
-  updateMusicButton();
-});
-bgMusic.addEventListener("pause", () => {
-  musicIsPlaying = false;
-  updateMusicButton();
-});
-tryPlayMusic();
+const welcomeNextButton = document.getElementById("welcomeNextButton");
+if (welcomeNextButton) welcomeNextButton.addEventListener("click", tryPlayMusic);
 
 function showScreen(id) {
+  document.body.classList.toggle("quiz-screen-active", ["quizIntro", "loveQuiz", "reasons", "coupleQuiz"].includes(id));
   screens.forEach(s => s.classList.toggle("active", s.id === id));
   window.scrollTo({ top: 0, behavior: "smooth" });
 
-  // Try music after a user interaction.
-  if (bgMusic && bgMusic.paused) {
-    tryPlayMusic();
-  }
 }
 
 document.querySelectorAll("[data-next]").forEach(btn => {
@@ -221,6 +209,100 @@ function createPhotoId() {
     : `photo-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
 
+function releaseBackgroundAudioUrl() {
+  if (backgroundAudioObjectUrl) URL.revokeObjectURL(backgroundAudioObjectUrl);
+  backgroundAudioObjectUrl = null;
+}
+
+function setBackgroundAudioSource(source) {
+  if (audioPreview) audioPreview.src = source;
+  if (bgMusic) {
+    bgMusic.src = source;
+    bgMusic.load();
+  }
+}
+
+async function renderAudioInput(audio) {
+  selectedBackgroundAudio = { ...defaultBackgroundAudio, ...(audio || {}) };
+  if (audioFileName) audioFileName.textContent = selectedBackgroundAudio.name;
+
+  if (selectedBackgroundAudio.src.startsWith("indexeddb:")) {
+    if (welcomeNextButton) welcomeNextButton.disabled = true;
+    try {
+      const file = await loadPhotoBlob(selectedBackgroundAudio.id);
+      if (!file) throw new Error("Saved audio file is missing");
+      releaseBackgroundAudioUrl();
+      backgroundAudioObjectUrl = URL.createObjectURL(file);
+      setBackgroundAudioSource(backgroundAudioObjectUrl);
+    } catch (error) {
+      selectedBackgroundAudio = { ...defaultBackgroundAudio };
+      if (audioFileName) audioFileName.textContent = defaultBackgroundAudio.name;
+      setBackgroundAudioSource(defaultBackgroundAudio.src);
+      setDraftStatus("The saved song could not be loaded. The default song is selected.");
+    } finally {
+      if (welcomeNextButton) welcomeNextButton.disabled = false;
+    }
+    return;
+  }
+
+  releaseBackgroundAudioUrl();
+  setBackgroundAudioSource(selectedBackgroundAudio.src);
+}
+
+const chooseAudioBtn = document.getElementById("chooseAudioBtn");
+if (chooseAudioBtn) chooseAudioBtn.addEventListener("click", () => audioFileInput.click());
+
+if (audioFileInput) {
+  audioFileInput.addEventListener("change", async event => {
+    const file = event.currentTarget.files[0];
+    if (!file) return;
+    if (!file.type.startsWith("audio/")) {
+      setDraftStatus("Choose an audio file for the background song.");
+      return;
+    }
+
+    const previousAudio = selectedBackgroundAudio;
+    const audioId = createPhotoId();
+    selectedBackgroundAudio = {
+      id: audioId,
+      src: `indexeddb:${audioId}`,
+      name: file.name,
+      type: file.type || "audio/mpeg"
+    };
+    releaseBackgroundAudioUrl();
+    backgroundAudioObjectUrl = URL.createObjectURL(file);
+    setBackgroundAudioSource(backgroundAudioObjectUrl);
+    if (audioFileName) audioFileName.textContent = file.name;
+
+    const chooseAudioButton = byId("chooseAudioBtn");
+    const defaultAudioButton = byId("useDefaultAudioBtn");
+    if (chooseAudioButton) chooseAudioButton.disabled = true;
+    if (defaultAudioButton) defaultAudioButton.disabled = true;
+    backgroundAudioSavePromise = savePhotoBlob(audioId, file).then(() => {
+      if (previousAudio.src.startsWith("indexeddb:")) deletePhotoBlob(previousAudio.id).catch(() => {});
+      setDraftStatus("Song added. Save the draft to keep it selected.");
+    }).catch(() => {
+      selectedBackgroundAudio = { ...defaultBackgroundAudio };
+      renderAudioInput(defaultBackgroundAudio);
+      setDraftStatus("This song could not be stored in this browser. Try a smaller audio file.");
+    });
+    await backgroundAudioSavePromise;
+    backgroundAudioSavePromise = null;
+    if (chooseAudioButton) chooseAudioButton.disabled = false;
+    if (defaultAudioButton) defaultAudioButton.disabled = false;
+  });
+}
+
+const useDefaultAudioBtn = document.getElementById("useDefaultAudioBtn");
+if (useDefaultAudioBtn) {
+  useDefaultAudioBtn.addEventListener("click", () => {
+    if (selectedBackgroundAudio.src.startsWith("indexeddb:")) {
+      deletePhotoBlob(selectedBackgroundAudio.id).catch(() => {});
+    }
+    renderAudioInput(defaultBackgroundAudio);
+  });
+}
+
 function createQuizQuestion(question = "Who knows you best?", options = ["You", "Me", "Both of us"], answerIndex = 0) {
   return {
     question,
@@ -244,6 +326,7 @@ function getDraftDefaults() {
       createQuizQuestion("What makes a great birthday?", ["Good company", "Lots of fun", "A favorite treat"], 0)
     ],
     photos: [{ id: "paris-default", src: "assets/Paris.png", caption: "Our dream destination" }],
+    audio: { ...defaultBackgroundAudio },
     yesNoQuestion: "Ready for a birthday surprise?",
     yesPuzzle: "I knew you'd be up for it!",
     decoyPhrases: [...defaultDecoyPhrases]
@@ -306,6 +389,7 @@ function getDraftFromForm() {
       src: item.dataset.photoSrc,
       caption: item.querySelector(".photo-caption-input").value.trim()
     })).filter(photo => photo.src),
+    audio: { ...selectedBackgroundAudio },
     yesNoQuestion: (byId("yesNoQuestion") && byId("yesNoQuestion").value.trim()) || getDraftDefaults().yesNoQuestion,
     yesPuzzle: (byId("yesPuzzle") && byId("yesPuzzle").value.trim()) || getDraftDefaults().yesPuzzle,
     decoyPhrases: getDecoyPhraseList(
@@ -453,7 +537,8 @@ function renderStoryPhotos(photos = []) {
 }
 
 async function waitForPhotoUploads() {
-  await Promise.all(Array.from(document.querySelectorAll(".photo-input-item"), item => item.photoSavePromise).filter(Boolean));
+  const photoUploads = Array.from(document.querySelectorAll(".photo-input-item"), item => item.photoSavePromise);
+  await Promise.all([...photoUploads, backgroundAudioSavePromise].filter(Boolean));
 }
 
 function renderDecoyPhraseInputs(phrases) {
@@ -547,6 +632,7 @@ function populateDraftForm(draft) {
   if (byId("loveLetter")) byId("loveLetter").value = values.loveLetter;
   if (byId("yesNoQuestion")) byId("yesNoQuestion").value = values.yesNoQuestion || getDraftDefaults().yesNoQuestion;
   if (byId("yesPuzzle")) byId("yesPuzzle").value = values.yesPuzzle;
+  renderAudioInput(values.audio || defaultBackgroundAudio);
   renderPhotoInputs(values.photos || getDraftDefaults().photos);
   renderDecoyPhraseInputs(values.decoyPhrases);
   renderQuizInputBlocks(values.quizQuestions || getDraftDefaults().quizQuestions);
@@ -559,7 +645,7 @@ function applyDraftToExperience(draft) {
   if (byId("welcomeNextButton")) byId("welcomeNextButton").textContent = draft.nextButtonText;
   if (byId("birthdayRecipient")) byId("birthdayRecipient").textContent = draft.recipientName;
   if (byId("birthdayType")) byId("birthdayType").textContent = draft.personalMessage;
-  if (byId("yesNoQuestionHeading")) byId("yesNoQuestionHeading").textContent = `${draft.yesNoQuestion || getDraftDefaults().yesNoQuestion} ❤️`;
+  if (byId("yesNoQuestionHeading")) byId("yesNoQuestionHeading").textContent = draft.yesNoQuestion || getDraftDefaults().yesNoQuestion;
   if (byId("finalSender")) byId("finalSender").textContent = `${draft.senderName} ❤️`;
   renderStoryPhotos(draft.photos || []);
 
@@ -708,7 +794,7 @@ const noMessages = [
   "Are you REALLY sure? 😏",
   "Nice try! 😂",
   "The NO button is getting nervous... 🏃",
-  "Okay, now you're just teasing me. ❤️",
+  "Okay, now you're just teasing me.",
   "Fine. NO is officially going into hiding! Find YES! 🧩"
 ];
 
@@ -741,7 +827,7 @@ function buildYesFinder() {
       balloon.disabled = true;
       poppedBalloons++;
       const isFinalBalloon = poppedBalloons === 9;
-      const revealedText = isFinalBalloon ? "YES ❤️" : decoys.shift();
+      const revealedText = isFinalBalloon ? "YES" : decoys.shift();
       const reveal = balloon.querySelector(".balloon-reveal");
       reveal.textContent = revealedText;
       balloon.classList.add("popped");
@@ -753,7 +839,7 @@ function buildYesFinder() {
         : `${poppedBalloons} / 9 balloons popped`;
 
       if (isFinalBalloon) {
-        noHint.textContent = `${activeDraft.yesPuzzle} ⚖️❤️`;
+        noHint.textContent = `${activeDraft.yesPuzzle} ⚖️`;
         yesButton.classList.remove("hidden");
       }
     });
@@ -835,8 +921,8 @@ function renderReason() {
   reasonText.textContent = r.text;
   [...reasonDots.children].forEach((d, i) => d.classList.toggle("active", i === reasonIndex));
   reasonNext.textContent = reasonIndex === CONFIG.REASONS.length - 1
-    ? "Okay... one more game 😏"
-    : "There's more... ❤️";
+    ? "Okay... one more game"
+    : "There's more...";
 }
 
 reasonNext.addEventListener("click", () => {
@@ -878,9 +964,9 @@ function renderCoupleQuestion() {
     btn.addEventListener("click", () => {
       [...coupleOptions.children].forEach(b => b.disabled = true);
       if (i === q.correct) {
-        coupleFeedback.textContent = "Correct! ❤️ You know us too well.";
+        coupleFeedback.textContent = "Correct! You know us too well.";
       } else {
-        coupleFeedback.textContent = "Hmm... I'll let you have that one. 😂❤️";
+        coupleFeedback.textContent = "Hmm... I'll let you have that one. 😂";
       }
       coupleNext.textContent = coupleIndex === CONFIG.COUPLE_QUIZ.length - 1
         ? "See our story 📸"
