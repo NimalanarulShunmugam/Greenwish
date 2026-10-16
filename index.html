@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ff5c8a">
-  <title>For My Love ❤️</title>
+  <title>Birthday Surprise</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,29 +20,29 @@
         <div class="builder-panel card">
           <p class="eyebrow">Birthday MVP</p>
           <h1>Design your page</h1>
-          <p class="lead">Add the message details on the left and watch the live birthday page on the right.</p>
+          <p class="lead">Add the details for your birthday surprise.</p>
 
           <form id="draftForm" class="draft-form">
             <div class="field-grid two-col">
               <label class="field">
                 <span>Sender name</span>
-                <input id="senderName" name="senderName" type="text" placeholder="e.g., Alex" value="Your Name" required />
+                <input id="senderName" name="senderName" type="text" placeholder="e.g., Alex" value="Alex" required />
               </label>
 
               <label class="field">
                 <span>Recipient name</span>
-                <input id="recipientName" name="recipientName" type="text" placeholder="e.g., Sarah" value="My Love" required />
+                <input id="recipientName" name="recipientName" type="text" placeholder="e.g., Taylor" value="Taylor" required />
               </label>
             </div>
 
             <label class="field">
               <span>First page heading</span>
-              <input id="heroTitle" name="heroTitle" type="text" placeholder="e.g., Happy Birthday, Sarah!" value="Happy Birthday, My Love!" />
+              <input id="heroTitle" name="heroTitle" type="text" placeholder="e.g., Happy Birthday, Taylor!" value="Happy Birthday, Taylor!" />
             </label>
 
             <label class="field">
               <span>First page message</span>
-              <textarea id="firstPageMessage" name="firstPageMessage" rows="3" placeholder="e.g., I made this little surprise to celebrate you and all the joy you bring.">The world feels brighter with you in it. Today is all about celebrating the love, the laughter, and the beautiful life we are building together.</textarea>
+              <textarea id="firstPageMessage" name="firstPageMessage" rows="3" placeholder="e.g., I made this little surprise to celebrate you and all the joy you bring.">Today is all about celebrating you, sharing a few laughs, and making another happy memory.</textarea>
             </label>
 
             <label class="field">
@@ -52,13 +52,22 @@
 
             <label class="field">
               <span>Personal message</span>
-              <textarea id="personalMessage" name="personalMessage" rows="4" placeholder="e.g., Happy Birthday! Your laugh makes every day brighter.">Happy Birthday! You make every day brighter and every moment feel more meaningful. I am so lucky to celebrate you today.</textarea>
+              <textarea id="personalMessage" name="personalMessage" rows="4" placeholder="e.g., Happy Birthday! Your laugh makes every day brighter.">Happy Birthday! Wishing you a day full of laughter, good memories, and your favorite things.</textarea>
             </label>
 
             <label class="field">
-              <span>Love note</span>
-              <textarea id="loveLetter" name="loveLetter" rows="5" placeholder="e.g., You are my favorite person, and I feel lucky to share life with you.">You are my favorite person, my safe place, and the reason I smile without trying. Thank you for being the love of my life.</textarea>
+              <span>Special happy note</span>
+              <textarea id="loveLetter" name="loveLetter" rows="5" placeholder="e.g., Thanks for all the laughs and great memories. I hope the year ahead brings you plenty of good things.">Thanks for all the laughs, encouragement, and memories. I hope the year ahead brings you plenty of good things.</textarea>
             </label>
+
+            <div class="field-group-block">
+              <div class="field-header-row">
+                <span>Photo memories (optional)</span>
+                <button type="button" class="mini-btn" id="addPhotoBtn">+ Add photo</button>
+              </div>
+              <div id="photoInputsContainer" class="photo-inputs-container"></div>
+              <small>Keep the Paris example, remove it, or add as many of your own photos as you like.</small>
+            </div>
 
             <div class="field-group-block">
               <div class="field-header-row">
@@ -69,14 +78,19 @@
             </div>
 
             <label class="field">
+              <span>Give a yes or no question</span>
+              <input id="yesNoQuestion" name="yesNoQuestion" type="text" placeholder="e.g., Ready for a birthday surprise?" value="Ready for a birthday surprise?" />
+            </label>
+
+            <label class="field">
               <span>Hidden yes puzzle</span>
-              <input id="yesPuzzle" name="yesPuzzle" type="text" placeholder="e.g., I knew you'd say yes!" value="The secret answer is YES" />
+              <input id="yesPuzzle" name="yesPuzzle" type="text" placeholder="e.g., I knew you'd be up for it!" value="I knew you'd be up for it!" />
             </label>
 
             <div class="field">
               <span>Decoy phrases (8 favorite or often-used phrases you share)</span>
               <div id="decoyPhraseInputs" class="field-grid"></div>
-              <small>Leave any blank and we'll fill it with a romantic phrase.</small>
+              <small>Leave any blank and we'll fill it with a cheerful phrase.</small>
             </div>
 
             <div class="builder-actions">
@@ -88,54 +102,20 @@
           </form>
         </div>
 
-        <div class="preview-panel">
-          <div class="sample-card">
-            <div class="balloon-group" aria-hidden="true">
-              <span class="balloon b-one">🎈</span>
-              <span class="balloon b-two">💖</span>
-              <span class="balloon b-three">🎂</span>
-            </div>
-
-            <div class="sample-badge">Birthday Wish</div>
-            <div class="sample-heart">♥</div>
-            <p class="sample-kicker">For the one I adore</p>
-            <h2 id="previewHeroTitle">Happy Birthday, My Love!</h2>
-            <p id="previewFirstPageMessage" class="sample-copy">The world feels brighter with you in it.</p>
-
-            <button type="button" class="sample-primary" id="previewPrimaryAction">Open surprise</button>
-
-            <div class="preview-mini-card">
-              <p class="mini-label">A little message</p>
-              <p id="previewPersonalMessage" class="mini-message">Happy Birthday! You make every day brighter.</p>
-            </div>
-
-            <div class="preview-quiz-box">
-              <div class="question-number">QUIZ</div>
-              <div id="previewQuizList" class="preview-quiz-list"></div>
-            </div>
-
-            <div class="preview-meta">
-              <p><strong>Hidden YES:</strong> <span id="previewYesPuzzle">The secret answer is YES</span></p>
-              <p><strong>Decoy phrases:</strong> <span id="previewDecoyPhrases">coffee, rain, late-night chats</span></p>
-            </div>
-
-            <button type="button" class="sample-no" id="previewNoButton">No, maybe not</button>
-          </div>
-        </div>
       </div>
     </section>
 
     <!-- 1. Welcome -->
     <section class="screen" id="welcome">
       <div class="card hero-card">
-        <div class="mini-badge">A little birthday surprise ❤️</div>
+        <div class="mini-badge">A little birthday surprise ✨</div>
         <div class="big-heart">♥</div>
-        <p class="eyebrow">Made with love, just for you</p>
-        <h1 id="welcomeTitle">Happy Birthday, My Love! 🎂</h1>
+        <p class="eyebrow">Made just for you</p>
+        <h1 id="welcomeTitle">Happy Birthday, Taylor! 🎂</h1>
         <p class="lead" id="welcomeMessage">
           I made something special to celebrate you. Ready to open it?
         </p>
-        <p class="script">A little love, a few happy memories, and a surprise just for you.</p>
+        <p class="script">A little fun, a few happy memories, and a surprise just for you.</p>
         <button class="primary-btn" id="welcomeNextButton" data-next="birthday">Open surprise</button>
       </div>
     </section>
@@ -145,13 +125,13 @@
       <div class="card">
         <div class="emoji-row">🎈 🎂 🎉</div>
         <p class="eyebrow">Today is all about you 🎂 🎉</p>
-        <h1>Happy Birthday,<br><span class="accent" id="birthdayRecipient"> My Love ❤️</span></h1>
+        <h1>Happy Birthday,<br><span class="accent" id="birthdayRecipient"> Taylor</span></h1>
         <p class="lead">
           The world became a little brighter<br>
-          on the day you were born.
+          on the day you arrived.
         </p>
         <div class="type-box" id="birthdayType">
-          I feel so lucky to have you in my life.
+          I'm glad I get to celebrate you today.
         </div>
         <button class="primary-btn" data-next="quizIntro">Continue ❤️</button>
       </div>
@@ -175,16 +155,16 @@
     <!-- 4. Love quiz -->
     <section class="screen" id="loveQuiz">
       <div class="card quiz-card">
-        <div class="question-number">LOVE DETECTOR 3000</div>
-        <h2>Do you love me? ❤️</h2>
-        <p class="subtle">Your YES is hiding behind 8 playful excuses. Can you find it? 🕵️‍♀️</p>
+        <div class="question-number">SURPRISE METER 3000</div>
+        <h2 id="yesNoQuestionHeading">Ready for a birthday surprise? ✨</h2>
+        <p class="subtle">Pop all 9 balloons to reveal the answer. 🕵️‍♀️</p>
 
         <div class="yes-answer-area">
           <div class="yes-puzzle-label">
             <span>EXCUSE-O-METER</span>
             <span id="yesPuzzleProgress">0 / 9 opened</span>
           </div>
-          <div class="yes-puzzle-grid" id="yesPuzzleGrid" aria-label="Find the hidden yes tile"></div>
+          <div class="balloon-board" id="yesPuzzleGrid" aria-label="Pop all nine balloons to reveal the answer"></div>
           <button class="yes-btn hidden" id="yesButton">YES ❤️</button>
         </div>
         <div class="no-button-area" id="noButtonArea">
@@ -198,8 +178,8 @@
     <section class="screen" id="reasons">
       <div class="card">
         <p class="eyebrow">A few reasons...</p>
-        <h2>Why I Love You ❤️</h2>
-        <p class="subtle">It's the little things that make me love you.</p>
+        <h2>What Makes You Special ✨</h2>
+        <p class="subtle">A few of the things that make you wonderful.</p>
 
         <div class="reason-card" id="reasonCard">
           <div class="reason-number">01</div>
@@ -217,7 +197,7 @@
     <section class="screen" id="coupleQuiz">
       <div class="card">
         <p class="eyebrow">Round 2</p>
-        <h2>How well do you know <span class="accent">us?</span> 🥰</h2>
+        <h2>How well do we know <span class="accent">each other?</span> 😊</h2>
         <p class="subtle">A few playful questions about us.</p>
 
         <div class="memory-question">
@@ -237,32 +217,7 @@
         <h2>Some moments I never want to forget 📸</h2>
         <p class="subtle">A few moments worth keeping.</p>
 
-        <div class="timeline">
-          <article class="timeline-item">
-            <div class="timeline-dot">❤️</div>
-            <div class="memory-photo"><img src="assets/Photo1.png" alt="The beginning of our story"></div>
-            <h3>A favorite memory</h3>
-            <p>A moment we'll always treasure</p>
-          </article>
-          <article class="timeline-item">
-            <div class="timeline-dot">🥰</div>
-            <div class="memory-photo"><img src="assets/Photo2.png" alt="A favorite memory together"></div>
-            <h3>Together is our favorite place</h3>
-            <p>One of those days we wish could last a little longer</p>
-          </article>
-          <article class="timeline-item">
-            <div class="timeline-dot">✈️</div>
-            <div class="memory-photo"><img src="assets/Photo3.png" alt="An adventure together"></div>
-            <h3>An Adventure</h3>
-            <p>Here's to many more adventures together</p>
-          </article>
-          <article class="timeline-item">
-            <div class="timeline-dot">💍</div>
-            <div class="memory-photo"><img src="assets/Photo4.png" alt="The two of us"></div>
-            <h3>Our Promise</h3>
-            <p>Every chapter is better with you by my side</p>
-          </article>
-        </div>
+        <div class="timeline" id="storyTimeline"></div>
 
         <button class="primary-btn" data-next="letter">One last thing... 💌</button>
       </div>
@@ -273,7 +228,7 @@
       <div class="card letter-card">
         <div class="envelope">💌</div>
         <p class="eyebrow">From my heart</p>
-        <h2>To My Love</h2>
+        <h2>A Special Happy Note</h2>
         <div class="letter" id="letterText"></div>
         <button class="primary-btn" id="finalSurpriseBtn">🎁 Open your final surprise</button>
       </div>
@@ -282,19 +237,19 @@
     <!-- 9. Final -->
     <section class="screen" id="final">
       <div class="card final-card">
-        <div class="final-hearts">❤️ 💕 ❤️</div>
+        <div class="final-hearts">🎉 🎈 🎉</div>
         <div class="countdown" id="countdown">3</div>
         <div id="finalContent" class="hidden">
           <div class="emoji-big">🎉</div>
           <h1>HAPPY BIRTHDAY!</h1>
-          <h2 class="script accent">My Love ❤️</h2>
+          <h2 class="script accent">Today is your day!</h2>
           <p class="lead">
-            I love you more than this little website<br>
-            could ever explain.
+            I hope this little surprise brings<br>
+            a smile to your day.
           </p>
           <div class="signature">
-            Forever yours,<br>
-            <strong id="finalSender">Your Name ❤️</strong>
+            With best wishes,<br>
+            <strong id="finalSender">Alex</strong>
           </div>
           <button class="secondary-btn" id="replayBtn">↻ Play it again</button>
           <div class="builder-actions">

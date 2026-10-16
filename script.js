@@ -12,53 +12,53 @@
 */
 
 const CONFIG = {
-  HER_NAME: "My Love",
-  YOUR_NAME: "Your Name",
+  HER_NAME: "Taylor",
+  YOUR_NAME: "Alex",
 
-  LOVE_LETTER: `Happy Birthday, my love. ❤️
+  LOVE_LETTER: `Happy Birthday, Taylor! 🎂
 
-Today is a reminder of how grateful I am to have you in my life.
+Thanks for all the laughs, encouragement, and great memories.
 
-Your kindness, your laughter, and the way you make ordinary moments feel special mean more to me than I can say.
+You bring so much fun and kindness to the people around you.
 
-I hope this year brings you joy, new adventures, and everything your heart is hoping for.
+I hope the year ahead brings you new adventures and plenty of reasons to celebrate.
 
-No matter where life takes us, I'm thankful for every moment we share.
+Keep being your one-of-a-kind self, and never stop looking forward to what's next.
 
-Happy Birthday. I love you, always.
+Have a wonderful birthday and an amazing year!
 
-With all my love,\nYour Name ❤️`,
+With best wishes,\nAlex`,
 
   REASONS: [
     {
       icon: "😊",
       title: "Your kindness",
-      text: "The way you care makes every day feel a little brighter."
+      text: "Your kindness makes a difference to the people around you."
     },
     {
       icon: "🤍",
       title: "Your laugh",
-      text: "I love how easily you can turn an ordinary moment into a happy one."
+      text: "Your laughter can turn an ordinary moment into a fun one."
     },
     {
       icon: "😂",
       title: "Our conversations",
-      text: "Even the simplest chats are special when I share them with you."
+      text: "Even the simplest chats with you are never boring."
     },
     {
       icon: "🏡",
       title: "You feel like home",
-      text: "Being with you makes anywhere feel like the right place to be."
+      text: "You make any place more fun to be."
     },
     {
       icon: "🥰",
       title: "The little things",
-      text: "The thoughtful things you do stay with me long after the moment passes."
+      text: "The thoughtful things you do make a lasting difference."
     },
     {
       icon: "❤️",
       title: "Simply... you",
-      text: "I love you for exactly who you are."
+      text: "You are great exactly as you are."
     }
   ],
 
@@ -74,13 +74,13 @@ With all my love,\nYour Name ❤️`,
       correct: 2
     },
     {
-      question: "What's the best kind of date? ✨",
-      options: ["A cozy night in", "A little adventure", "Good food together", "Any time with you"],
+      question: "What should we do to celebrate? ✨",
+      options: ["Have a picnic", "Play a game", "Enjoy a favorite meal", "All of the above"],
       correct: 3
     },
     {
-      question: "What do I love most about you? 😊",
-      options: ["Your kindness", "Your laugh", "Your heart", "All of you"],
+      question: "Which quality stands out most? 😊",
+      options: ["Your kindness", "Your humor", "Your courage", "All of them"],
       correct: 3
     }
   ]
@@ -133,18 +133,20 @@ document.querySelectorAll("[data-next]").forEach(btn => {
   btn.addEventListener("click", () => showScreen(btn.dataset.next));
 });
 
-const draftStorageKey = "greenwish-draft-v2";
+const draftStorageKey = "greenwish-draft-v3";
+const photoDatabaseName = "greenwish-photo-library";
 const byId = (id) => document.getElementById(id);
 let activeDraft = null;
+let storyPhotoUrls = [];
 const defaultDecoyPhrases = [
   "I saved you the last bite",
-  "Just five more minutes together",
-  "You make everything feel like home",
-  "I'll always choose you",
-  "Let's make another happy memory",
-  "You are my favorite person",
-  "I love doing life with you",
-  "Wishing you all the happiness you deserve"
+  "Just five more minutes",
+  "Are we there yet?",
+  "Guess what happened today?",
+  "Let's do that again sometime",
+  "You had to be there",
+  "I'll bring the snacks",
+  "One more story"
 ];
 
 function getDecoyPhraseList(phrases) {
@@ -160,6 +162,65 @@ function getDecoyPhraseList(phrases) {
   });
 }
 
+function openPhotoDatabase() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(photoDatabaseName, 1);
+    request.onupgradeneeded = () => request.result.createObjectStore("photos");
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+function savePhotoBlob(photoId, file) {
+  return openPhotoDatabase().then(database => new Promise((resolve, reject) => {
+    const transaction = database.transaction("photos", "readwrite");
+    transaction.objectStore("photos").put(file, photoId);
+    transaction.oncomplete = () => {
+      database.close();
+      resolve();
+    };
+    transaction.onerror = () => {
+      database.close();
+      reject(transaction.error);
+    };
+  }));
+}
+
+function loadPhotoBlob(photoId) {
+  return openPhotoDatabase().then(database => new Promise((resolve, reject) => {
+    const request = database.transaction("photos", "readonly").objectStore("photos").get(photoId);
+    request.onsuccess = () => {
+      database.close();
+      resolve(request.result || null);
+    };
+    request.onerror = () => {
+      database.close();
+      reject(request.error);
+    };
+  }));
+}
+
+function deletePhotoBlob(photoId) {
+  return openPhotoDatabase().then(database => new Promise((resolve, reject) => {
+    const transaction = database.transaction("photos", "readwrite");
+    transaction.objectStore("photos").delete(photoId);
+    transaction.oncomplete = () => {
+      database.close();
+      resolve();
+    };
+    transaction.onerror = () => {
+      database.close();
+      reject(transaction.error);
+    };
+  }));
+}
+
+function createPhotoId() {
+  return typeof crypto.randomUUID === "function"
+    ? crypto.randomUUID()
+    : `photo-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
 function createQuizQuestion(question = "Who knows you best?", options = ["You", "Me", "Both of us"], answerIndex = 0) {
   return {
     question,
@@ -170,19 +231,21 @@ function createQuizQuestion(question = "Who knows you best?", options = ["You", 
 
 function getDraftDefaults() {
   return {
-    senderName: "Your Name",
-    recipientName: "My Love",
-    heroTitle: "Happy Birthday, My Love!",
-    firstPageMessage: "The world feels brighter with you in it. Today is all about celebrating the love, the laughter, and the beautiful life we are building together.",
+    senderName: "Alex",
+    recipientName: "Taylor",
+    heroTitle: "Happy Birthday, Taylor!",
+    firstPageMessage: "Today is all about celebrating you, sharing a few laughs, and making another happy memory.",
     nextButtonText: "Open surprise",
-    personalMessage: "Happy Birthday! You make every day brighter and every moment feel more meaningful. I am so lucky to celebrate you today.",
-    loveLetter: "You are my favorite person, my safe place, and the reason I smile without trying. Thank you for being the love of my life.",
+    personalMessage: "Happy Birthday! Wishing you a day full of laughter, good memories, and your favorite things.",
+    loveLetter: "Thanks for all the laughs, encouragement, and memories. I hope the year ahead brings you plenty of good things.",
     quizQuestions: [
-      createQuizQuestion("Who knows you best?", ["You", "Me", "Both of us"], 2),
-      createQuizQuestion("Who makes you smile the most?", ["Me", "You", "Our memories"], 0),
-      createQuizQuestion("What makes us special?", ["Love", "Laughter", "Everything"], 2)
+      createQuizQuestion("What always makes you smile?", ["A good story", "A tasty snack", "A fun day together"], 2),
+      createQuizQuestion("Which activity sounds most fun?", ["A day outside", "A movie", "Trying something new"], 2),
+      createQuizQuestion("What makes a great birthday?", ["Good company", "Lots of fun", "A favorite treat"], 0)
     ],
-    yesPuzzle: "The secret answer is YES",
+    photos: [{ id: "paris-default", src: "assets/Paris.png", caption: "Our dream destination" }],
+    yesNoQuestion: "Ready for a birthday surprise?",
+    yesPuzzle: "I knew you'd be up for it!",
     decoyPhrases: [...defaultDecoyPhrases]
   };
 }
@@ -238,11 +301,159 @@ function getDraftFromForm() {
     personalMessage: (byId("personalMessage") && byId("personalMessage").value.trim()) || getDraftDefaults().personalMessage,
     loveLetter: (byId("loveLetter") && byId("loveLetter").value.trim()) || getDraftDefaults().loveLetter,
     quizQuestions: quizQuestions.length ? quizQuestions : getDraftDefaults().quizQuestions,
+    photos: Array.from(document.querySelectorAll(".photo-input-item"), item => ({
+      id: item.dataset.photoId,
+      src: item.dataset.photoSrc,
+      caption: item.querySelector(".photo-caption-input").value.trim()
+    })).filter(photo => photo.src),
+    yesNoQuestion: (byId("yesNoQuestion") && byId("yesNoQuestion").value.trim()) || getDraftDefaults().yesNoQuestion,
     yesPuzzle: (byId("yesPuzzle") && byId("yesPuzzle").value.trim()) || getDraftDefaults().yesPuzzle,
     decoyPhrases: getDecoyPhraseList(
       Array.from(document.querySelectorAll(".decoy-phrase-input"), input => input.value)
     )
   };
+}
+
+function setPhotoInputPreview(item, src, isTemporary = false) {
+  const image = item.querySelector(".photo-input-image");
+  const emptyLabel = item.querySelector(".photo-input-empty");
+  if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
+  item.previewUrl = isTemporary ? src : null;
+  image.src = src;
+  image.hidden = false;
+  emptyLabel.hidden = true;
+}
+
+function createPhotoInput(photo = {}) {
+  const item = document.createElement("div");
+  item.className = "photo-input-item";
+  item.dataset.photoId = photo.id || createPhotoId();
+  item.dataset.photoSrc = photo.src || "";
+  item.innerHTML = `
+    <div class="photo-input-preview">
+      <img class="photo-input-image" alt="Selected photo" hidden />
+      <span class="photo-input-empty">Choose a photo</span>
+    </div>
+    <div class="photo-input-fields">
+      <label class="field compact-field">
+        <span>Message for this photo</span>
+        <input class="photo-caption-input" type="text" placeholder="e.g., Our dream destination" />
+      </label>
+      <div class="photo-input-actions">
+        <input class="photo-file-input" type="file" accept="image/*" hidden />
+        <button type="button" class="secondary-btn photo-browse-button">Browse local photos</button>
+        <button type="button" class="mini-btn danger photo-remove-button">Remove</button>
+      </div>
+      <p class="photo-file-name"></p>
+    </div>
+  `;
+
+  item.querySelector(".photo-caption-input").value = photo.caption || "";
+  item.querySelector(".photo-browse-button").addEventListener("click", () => {
+    item.querySelector(".photo-file-input").click();
+  });
+  item.querySelector(".photo-file-input").addEventListener("change", async event => {
+    const file = event.currentTarget.files[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      setDraftStatus("Choose an image file for this photo memory.");
+      return;
+    }
+
+    const previewUrl = URL.createObjectURL(file);
+    setPhotoInputPreview(item, previewUrl, true);
+    item.querySelector(".photo-file-name").textContent = file.name;
+    const saveTask = savePhotoBlob(item.dataset.photoId, file).then(() => {
+      item.dataset.photoSrc = `indexeddb:${item.dataset.photoId}`;
+      setDraftStatus("Photo added. Save the draft to keep this photo in your story.");
+    }).catch(() => {
+      item.dataset.photoSrc = "";
+      setDraftStatus("This photo could not be stored in this browser. Try a smaller image.");
+    });
+    item.photoSavePromise = saveTask;
+    await saveTask;
+    item.photoSavePromise = null;
+  });
+  item.querySelector(".photo-remove-button").addEventListener("click", () => {
+    const source = item.dataset.photoSrc;
+    if (source.startsWith("indexeddb:")) {
+      deletePhotoBlob(item.dataset.photoId).catch(() => {});
+    }
+    if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
+    item.remove();
+  });
+
+  if (photo.src && photo.src.startsWith("indexeddb:")) {
+    loadPhotoBlob(item.dataset.photoId).then(file => {
+      if (file && item.isConnected) setPhotoInputPreview(item, URL.createObjectURL(file), true);
+    }).catch(() => {});
+    item.querySelector(".photo-file-name").textContent = "Saved photo";
+  } else if (photo.src) {
+    setPhotoInputPreview(item, photo.src);
+    item.querySelector(".photo-file-name").textContent = "Paris example";
+  }
+
+  return item;
+}
+
+function renderPhotoInputs(photos) {
+  const container = byId("photoInputsContainer");
+  if (!container) return;
+  container.innerHTML = "";
+  (photos || []).forEach(photo => container.appendChild(createPhotoInput(photo)));
+}
+
+function renderStoryPhotos(photos = []) {
+  const timeline = byId("storyTimeline");
+  if (!timeline) return;
+  storyPhotoUrls.forEach(url => URL.revokeObjectURL(url));
+  storyPhotoUrls = [];
+  timeline.innerHTML = "";
+
+  if (!photos.length) {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.className = "story-empty";
+    emptyMessage.textContent = "No photo memories added yet.";
+    timeline.appendChild(emptyMessage);
+    return;
+  }
+
+  const memoryIcons = ["❤️", "🥰", "✈️", "💍"];
+  photos.forEach((photo, index) => {
+    const item = document.createElement("article");
+    item.className = "timeline-item";
+    const dot = document.createElement("div");
+    dot.className = "timeline-dot";
+    dot.textContent = memoryIcons[index % memoryIcons.length];
+    const imageFrame = document.createElement("div");
+    imageFrame.className = "memory-photo";
+    const image = document.createElement("img");
+    image.alt = photo.caption || `Photo memory ${index + 1}`;
+    imageFrame.appendChild(image);
+    item.append(dot, imageFrame);
+
+    if (photo.caption) {
+      const caption = document.createElement("p");
+      caption.textContent = photo.caption;
+      item.appendChild(caption);
+    }
+    timeline.appendChild(item);
+
+    if (photo.src.startsWith("indexeddb:")) {
+      loadPhotoBlob(photo.id).then(file => {
+        if (!file || !image.isConnected) return;
+        const url = URL.createObjectURL(file);
+        storyPhotoUrls.push(url);
+        image.src = url;
+      }).catch(() => {});
+    } else {
+      image.src = photo.src;
+    }
+  });
+}
+
+async function waitForPhotoUploads() {
+  await Promise.all(Array.from(document.querySelectorAll(".photo-input-item"), item => item.photoSavePromise).filter(Boolean));
 }
 
 function renderDecoyPhraseInputs(phrases) {
@@ -334,54 +545,11 @@ function populateDraftForm(draft) {
   if (byId("nextButtonText")) byId("nextButtonText").value = values.nextButtonText;
   if (byId("personalMessage")) byId("personalMessage").value = values.personalMessage;
   if (byId("loveLetter")) byId("loveLetter").value = values.loveLetter;
+  if (byId("yesNoQuestion")) byId("yesNoQuestion").value = values.yesNoQuestion || getDraftDefaults().yesNoQuestion;
   if (byId("yesPuzzle")) byId("yesPuzzle").value = values.yesPuzzle;
+  renderPhotoInputs(values.photos || getDraftDefaults().photos);
   renderDecoyPhraseInputs(values.decoyPhrases);
   renderQuizInputBlocks(values.quizQuestions || getDraftDefaults().quizQuestions);
-}
-
-function renderQuizCards(draft) {
-  const previewQuizList = document.getElementById("previewQuizList");
-  const questions = draft.quizQuestions && draft.quizQuestions.length ? draft.quizQuestions : getDraftDefaults().quizQuestions;
-
-  const renderList = (container) => {
-    if (!container) return;
-    container.innerHTML = "";
-    questions.forEach((q, idx) => {
-      const item = document.createElement("div");
-      item.className = "preview-question-item";
-      const heading = document.createElement("h4");
-      heading.textContent = `Q${idx + 1}. ${q.question || `Question ${idx + 1}`}`;
-      const optionsList = document.createElement("ul");
-      (q.options || ["Option 1", "Option 2", "Option 3"]).forEach(option => {
-        const optionItem = document.createElement("li");
-        optionItem.textContent = option;
-        optionsList.appendChild(optionItem);
-      });
-      item.append(heading, optionsList);
-      container.appendChild(item);
-    });
-  };
-
-  renderList(previewQuizList);
-}
-
-function renderPreview(draft) {
-  const previewTitle = document.getElementById("previewHeroTitle");
-  const previewPageMessage = document.getElementById("previewFirstPageMessage");
-  const previewPrimaryAction = document.getElementById("previewPrimaryAction");
-  const previewPersonal = document.getElementById("previewPersonalMessage");
-  const previewYesPuzzle = document.getElementById("previewYesPuzzle");
-  const previewDecoyPhrases = document.getElementById("previewDecoyPhrases");
-
-  if (previewTitle) previewTitle.textContent = draft.heroTitle || `Happy Birthday, ${draft.recipientName}!`;
-  if (previewPageMessage) previewPageMessage.textContent = draft.firstPageMessage || "The world feels brighter with you in it.";
-  if (previewPrimaryAction) previewPrimaryAction.textContent = draft.nextButtonText || "Open surprise";
-  if (previewPersonal) previewPersonal.textContent = `${draft.personalMessage || "Happy Birthday!"}\n\nFrom ${draft.senderName}`;
-  if (previewYesPuzzle) previewYesPuzzle.textContent = draft.yesPuzzle;
-  const decoyPhraseSummary = getDecoyPhraseList(draft.decoyPhrases).join(", ");
-  if (previewDecoyPhrases) previewDecoyPhrases.textContent = decoyPhraseSummary;
-
-  renderQuizCards(draft);
 }
 
 function applyDraftToExperience(draft) {
@@ -391,7 +559,9 @@ function applyDraftToExperience(draft) {
   if (byId("welcomeNextButton")) byId("welcomeNextButton").textContent = draft.nextButtonText;
   if (byId("birthdayRecipient")) byId("birthdayRecipient").textContent = draft.recipientName;
   if (byId("birthdayType")) byId("birthdayType").textContent = draft.personalMessage;
+  if (byId("yesNoQuestionHeading")) byId("yesNoQuestionHeading").textContent = `${draft.yesNoQuestion || getDraftDefaults().yesNoQuestion} ❤️`;
   if (byId("finalSender")) byId("finalSender").textContent = `${draft.senderName} ❤️`;
+  renderStoryPhotos(draft.photos || []);
 
   CONFIG.COUPLE_QUIZ = draft.quizQuestions.map(question => ({
     question: question.question,
@@ -400,21 +570,29 @@ function applyDraftToExperience(draft) {
   }));
 }
 
-function saveCurrentDraft() {
+async function saveCurrentDraft() {
+  await waitForPhotoUploads();
   const draft = getDraftFromForm();
   activeDraft = draft;
   writeDraft(draft);
   setDraftStatus("Draft saved locally.");
-  renderPreview(draft);
   return draft;
 }
 
-function previewCurrentDraft() {
+async function previewCurrentDraft() {
+  await waitForPhotoUploads();
   activeDraft = getDraftFromForm();
-  renderPreview(activeDraft);
   applyDraftToExperience(activeDraft);
   resetExperience();
   showScreen("welcome");
+}
+
+const addPhotoBtn = document.getElementById("addPhotoBtn");
+if (addPhotoBtn) {
+  addPhotoBtn.addEventListener("click", () => {
+    const container = byId("photoInputsContainer");
+    if (container) container.appendChild(createPhotoInput());
+  });
 }
 
 const addQuestionBtn = document.getElementById("addQuestionBtn");
@@ -475,16 +653,10 @@ if (addQuestionBtn) {
 }
 
 const previewDraftBtn = document.getElementById("previewDraftBtn");
-const draftForm = document.getElementById("draftForm");
-if (draftForm) {
-  const updateLivePreview = () => renderPreview(getDraftFromForm());
-  draftForm.addEventListener("input", updateLivePreview);
-  draftForm.addEventListener("change", updateLivePreview);
-}
 
 if (previewDraftBtn) {
-  previewDraftBtn.addEventListener("click", () => {
-    previewCurrentDraft();
+  previewDraftBtn.addEventListener("click", async () => {
+    await previewCurrentDraft();
     setDraftStatus("Full experience preview started. Draft not saved yet.");
   });
 }
@@ -502,13 +674,7 @@ if (finalSaveDraftBtn) finalSaveDraftBtn.addEventListener("click", saveCurrentDr
 
 const savedDraft = readDraft();
 activeDraft = { ...getDraftDefaults(), ...(savedDraft || {}) };
-if (savedDraft) {
-  populateDraftForm(savedDraft);
-  renderPreview(activeDraft);
-} else {
-  populateDraftForm(activeDraft);
-  renderPreview(activeDraft);
-}
+populateDraftForm(activeDraft);
 applyDraftToExperience(activeDraft);
 
 /* Personalize visible text */
@@ -559,57 +725,39 @@ function moveNoButton() {
 function buildYesFinder() {
   yesPuzzleGrid.innerHTML = "";
   yesButton.classList.add("hidden");
-  yesPuzzleProgress.textContent = "0 / 9 opened";
-  const yesIndex = Math.floor(Math.random() * 9);
+  yesPuzzleProgress.textContent = "0 / 9 balloons popped";
   const decoys = getDecoyPhraseList(activeDraft.decoyPhrases);
-  let openedTiles = 0;
-  let yesTile = null;
+  let poppedBalloons = 0;
 
-  for (let i = 0; i < 9; i++) {
-    const tile = document.createElement("button");
-    tile.type = "button";
-    tile.className = "yes-puzzle-piece";
-    tile.textContent = "❓";
-    tile.setAttribute("aria-label", `Mystery tile ${i + 1}`);
-    tile.addEventListener("click", () => {
-      if (tile.disabled) return;
-      tile.disabled = true;
-      openedTiles++;
-      yesPuzzleProgress.textContent = `${openedTiles} / 9 opened`;
+  for (let index = 0; index < 9; index++) {
+    const balloon = document.createElement("button");
+    balloon.type = "button";
+    balloon.className = "decoy-balloon";
+    balloon.innerHTML = '<span class="balloon-art" aria-hidden="true">🎈</span><span class="balloon-reveal"></span>';
+    balloon.setAttribute("aria-label", `Pop balloon ${index + 1}`);
+    balloon.addEventListener("click", () => {
+      if (balloon.disabled) return;
 
-      if (i === yesIndex) {
-        yesTile = tile;
-        tile.textContent = openedTiles === 9 ? "YES ❤️" : "🔒 Found it";
-        tile.setAttribute("aria-label", openedTiles === 9
-          ? "Found the honest answer: yes"
-          : "YES found, but locked until the ninth tile");
-        tile.classList.add(openedTiles === 9 ? "correct" : "revealed");
-        noHint.textContent = openedTiles === 9
-          ? `${activeDraft.yesPuzzle} ⚖️❤️`
-          : "You found YES! The court unlocks it after all 9 tiles. 🔒";
-      } else {
-        const decoy = decoys.splice(Math.floor(Math.random() * decoys.length), 1)[0];
-        tile.textContent = decoy;
-        tile.setAttribute("aria-label", `Excuse: ${decoy}`);
-        tile.classList.add("revealed");
-        noHint.textContent = [
-          "Objection! That excuse makes no sense 😂",
-          "Suspicious. Someone has been notified 🕵️",
-          "The love court rejects this answer ⚖️"
-        ][Math.floor(Math.random() * 3)];
-      }
+      balloon.disabled = true;
+      poppedBalloons++;
+      const isFinalBalloon = poppedBalloons === 9;
+      const revealedText = isFinalBalloon ? "YES ❤️" : decoys.shift();
+      const reveal = balloon.querySelector(".balloon-reveal");
+      reveal.textContent = revealedText;
+      balloon.classList.add("popped");
+      balloon.setAttribute("aria-label", isFinalBalloon
+        ? "Ninth balloon popped: YES revealed"
+        : `Balloon popped: ${revealedText}`);
+      yesPuzzleProgress.textContent = isFinalBalloon
+        ? "9 / 9 popped: YES revealed!"
+        : `${poppedBalloons} / 9 balloons popped`;
 
-      if (openedTiles === 9) {
-        yesTile.textContent = "YES ❤️";
-        yesTile.setAttribute("aria-label", "Found the honest answer: yes");
-        yesTile.classList.remove("revealed");
-        yesTile.classList.add("correct");
-        yesButton.classList.remove("hidden");
-        yesPuzzleProgress.textContent = "CASE SOLVED: love confirmed";
+      if (isFinalBalloon) {
         noHint.textContent = `${activeDraft.yesPuzzle} ⚖️❤️`;
+        yesButton.classList.remove("hidden");
       }
     });
-    yesPuzzleGrid.appendChild(tile);
+    yesPuzzleGrid.appendChild(balloon);
   }
 }
 

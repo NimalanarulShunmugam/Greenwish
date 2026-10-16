@@ -10,7 +10,7 @@ This project is built with plain HTML, CSS, and JavaScript, so it runs without a
 
 - Multi-screen romantic story flow
 - Animated floating hearts and background effects
-- "Love detector" yes/no puzzle game
+- Yes/no balloon puzzle game
 - Personalized reasons section
 - Couple quiz with answer feedback
 - Photo timeline/story section
@@ -105,12 +105,12 @@ To customize the project for a new person or event, edit the `CONFIG` object in 
 
 ```javascript
 const CONFIG = {
-  HER_NAME: "My Love",
-  YOUR_NAME: "Your Name",
+  HER_NAME: "Taylor",
+  YOUR_NAME: "Alex",
 };
 ```
 
-### Update the love letter
+### Update the special happy note
 
 Change the `LOVE_LETTER` text block to match your message.
 
